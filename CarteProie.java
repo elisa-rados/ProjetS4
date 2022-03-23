@@ -11,8 +11,8 @@ package ProjetS4;
  */
 public class CarteProie extends Carte{
     int nbProie;
-    public CarteProie(int a){
-        this.nbProie=a;
+    public CarteProie(int b, int p){
+        super(b);
+        this.nbProie=p;
     }
-    
 }
