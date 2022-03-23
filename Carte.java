@@ -10,5 +10,9 @@ package ProjetS4;
  * @author Utilisateur
  */
 abstract class Carte {
+    int nbPasMax; //si CartePas: nombre exact, si CarteProie inférieur à ce nb
     
-}
+    public Carte(int pas){
+        this.nbPasMax=pas;
+    }
+} 
