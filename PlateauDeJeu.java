@@ -64,4 +64,42 @@ public class PlateauDeJeu {
         this.plateau[8][6]= new Flaque(6, 8, true);
         this.plateau[8][7]= new Flaque(7, 8, true);
     }
+    
+    public void updatePlateau(){ //dessiner un plateau sur la console pour se représenter le jeu
+        String[] representation= new String[16];
+        for(int i=0;i<11;i++){
+            for(int k=0; k<16; k++){
+            representation[k]=" ";
+            }
+            for(int j=0; j<16; j++){
+                if(this.plateau[i][j].getPion()==true){
+                    representation[j]=representation[j]+"p";
+                            }
+                if(this.plateau[i][j].getBlocDePierre()==true){
+                    representation[j]=representation[j]+"b";
+                }
+                 if(this.plateau[i][j].getMonstre()==true){
+                    representation[j]=representation[j]+"M";
+                }
+                 if(this.plateau[i][j].getClass().getName()=="finstere_flure.Flaque"){
+                    representation[j]=representation[j]+"f";
+                }
+                if(this.plateau[i][j].getPion()!=true && this.plateau[i][j].getBlocDePierre()!=true && this.plateau[i][j].getMonstre()!=true
+                        && this.plateau[i][j].getClass().getName()!="finstere_flure.Flaque"){
+                    representation[j]=representation[j]+" ";
+                }
+            }
+            affichageTableau(representation);
+        }
+    }
+    
+    public void affichageTableau(String[] tab){
+        String result= "| ";
+        String separation=" ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----";
+        for(int i=0; i<tab.length;i++){
+            result += tab[i] + " | ";
+        }
+        System.out.println(separation);
+        System.out.println(result);
+    }
 }
