@@ -10,9 +10,9 @@ package ProjetS4;
  * @author Utilisateur
  */
 public class CartePas extends Carte{
-    int nbPas;
+    
     public CartePas(int b){
-        this.nbPas=b;ç
+        super(b);
     }
     
 }
