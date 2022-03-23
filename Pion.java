@@ -17,11 +17,13 @@ public class Pion {
     private int direction;
     private String faceVisible= "blanc";
     private PlateauDeJeu p;
+    private String couleur;
     
     
-    public Pion( int face, int pile){
+    public Pion( int face, int pile, String couleur){
         this.blanc=face;
         this.noir=pile;
+        this.couleur= couleur;
         
     }
     
@@ -72,6 +74,7 @@ public class Pion {
         this.surPlateau=true;
         this.p=plateau;
         plateau.getPlateau()[0][0].setPion(true);
+        p.updatePlateau();
     }
     
     //deplacement d'une case d'un pion
@@ -80,6 +83,7 @@ public class Pion {
         //"2 : bas"
         //"3 : gauche"
         //"4 : droite"
+        p.getPlateau()[this.y][this.x].setPion(false); //le pion va changer d'emplacement
         if(direction==1){
             this.y=this.y-1;
         }
@@ -92,6 +96,8 @@ public class Pion {
         if(direction==4){
             this.x=this.x+1;
         }
+        p.getPlateau()[this.y][this.x].setPion(true); //nouvel emplacement du pion
+        this.p.updatePlateau();
     }
     
     private int demanderDirection(){
@@ -224,7 +230,7 @@ public class Pion {
         int i= this.nombreDeDeplacementsPossibles();
         int direction=this.demanderDirection(); //première fois qu'on demande la direction
         System.out.println(direction);
-        p.getPlateau()[this.y][this.x].setPion(false); //le pion va changer d'emplacement
+        //p.getPlateau()[this.y][this.x].setPion(false); //le pion va changer d'emplacement
         while(i!=0){
             if(direction!=0){
                 System.out.println(direction);
@@ -1129,7 +1135,7 @@ public class Pion {
             System.out.println("Votre tour est terminé");
             }
         }
-        p.getPlateau()[this.y][this.x].setPion(true); //nouvel emplacement du pion
+        //p.getPlateau()[this.y][this.x].setPion(true); //nouvel emplacement du pion
         this.retournerPion();
     }
 }
