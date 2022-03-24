@@ -19,7 +19,7 @@ public class Monstre { //regarde et cherche le pion le plus proche à gauche dro
     private ArrayList<Carte> paquetDeCartes = new ArrayList<>();
     
     public Monstre (ArrayList<Carte> paquet){
-        this.paquetDeCartes = new paquet<>();//pas sûre
+        this.paquetDeCartes = paquet;
     }
     
     
@@ -28,17 +28,32 @@ public class Monstre { //regarde et cherche le pion le plus proche à gauche dro
     //remplir paquet de cartes
     private ArrayList<Carte> remplirPaquet (ArrayList<Carte> paquet, Carte c) {
         paquet.add(c);
+        return(paquet);
     }
     
     //mélanger paquet de cartes
     private ArrayList<Carte> mélangerPaquet (ArrayList<Carte> paquet){
         Collections.shuffle(paquet);
         System.out.println(paquet);
+        return (paquet);
+    }
+    
+    //paquet vide?, inutile car 7 tours
+    private boolean verifVide (ArrayList<Carte> paquet){
+        boolean vide = false;
+        int taille = paquet.size();
+        if(taille==0){
+            vide=true;
+        }
+        return(vide);
     }
     
     
+    //tirer une carte
+    private Carte tirerCarte (ArrayList<Carte> paquet){
+        Carte cTirée = paquet.get(0);
+        return(cTirée);
+    }
 }
 //méthode pour afficher sa position
 //méthode déplacement voir dans Pion
-
-
