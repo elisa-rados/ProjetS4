@@ -15,6 +15,7 @@ public class Joueur {
     //joueur
     String nom;   //pseudo du joueur
     ArrayList<Pion> tab=new ArrayList<>();   //les pions qu'il a en sa possession
+    
     public Joueur(String e, ArrayList possession){
         this.nom=e;
         this.tab=possession;
@@ -30,6 +31,16 @@ public class Joueur {
     public int pionRestant(){
         return tab.size();
     }
+    
+    public void enleverPionListe(Pion p){
+        for(int i=0; i<tab.size(); i++){
+            if (tab.get(i).equals(p)){
+                tab.remove(i);
+            }
+        }
+    }
+       ) 
+    
     // Pour remettre un pion après la première manche
      public void remettre(Pion p){
          tab.add(p);   
