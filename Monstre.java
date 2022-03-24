@@ -5,6 +5,9 @@
  */
 package ProjetS4;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  *
  * @author rados
@@ -13,34 +16,29 @@ public class Monstre { //regarde et cherche le pion le plus proche à gauche dro
     //haut, bas, gauche, droite, 1234
     private int x=0, y=0;
     private int sensMonstre = 4;//il commence en haut à gauche du plateau en regardant vers la droite
+    private ArrayList<Carte> paquetDeCartes = new ArrayList<>();
     
-    
-    public boolean regarder (){
-        if(sensMonstre==1){//haut
-            for(int i=0; i</*nom du tableau où sont stockés les booléens de positions des pions*/.lenght; i++){
-            if(t[i]==true){//faire lignes et colonnes, tab2dim
-                int 
-            }
-        }
-        }
-        else if(sensMonstre==2){//bas
-            
-        }
-        else if(sensMonstre==3){//gauche
-            
-        }
-        else if(sensMonstre==4){//droite
-            
-        }
-        else{
-            
-        }
+    public Monstre (ArrayList<Carte> paquet){
+        this.paquetDeCartes = new paquet<>();//pas sûre
     }
     
-    public 
+    
+    public boolean regarder (){}
+    
+    //remplir paquet de cartes
+    private ArrayList<Carte> remplirPaquet (ArrayList<Carte> paquet, Carte c) {
+        paquet.add(c);
+    }
+    
+    //mélanger paquet de cartes
+    private ArrayList<Carte> mélangerPaquet (ArrayList<Carte> paquet){
+        Collections.shuffle(paquet);
+        System.out.println(paquet);
+    }
+    
+    
 }
 //méthode pour afficher sa position
 //méthode déplacement voir dans Pion
-
 
 
