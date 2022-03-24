@@ -19,6 +19,21 @@ public class Joueur {
         this.nom=e;
         this.tab=possession;
     }
+     public int plusMonstrueux(){
+        Random rand = new Random();
+        int nbJoueurs=2;
+        int numJMonstrueux= rand.nextInt(2+1);
+        System.out.println("le joueur: "+numJMonstrueux+"commence");
+        return numJMonstrueux;
+    }
+    //retourne le nombre de pion restants
+    public int pionRestant(){
+        return tab.size();
+    }
+    // Pour remettre un pion après la première manche
+     public void remettre(Pion p){
+         tab.add(p);   
+        }
     
     
 }
