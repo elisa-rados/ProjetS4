@@ -11,8 +11,9 @@ package ProjetS4;
  */
 public class Flaque extends Case {
     
-    public Flaque(float a, boolean acc) {
-        super(a, acc);
+    public Flaque(int a, int b, boolean acc) {
+        super(a, b, acc);
     }
+    
     
 }
