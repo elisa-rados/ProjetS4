@@ -17,13 +17,139 @@ public class Monstre { //regarde et cherche le pion le plus proche à gauche dro
     private int x=0, y=0;
     private int sensMonstre = 4;//il commence en haut à gauche du plateau en regardant vers la droite
     private ArrayList<Carte> paquetDeCartes = new ArrayList<>();
+    private PlateauDeJeu plateau;
     
-    public Monstre (ArrayList<Carte> paquet){
+    public Monstre (ArrayList<Carte> paquet, PlateauDeJeu p){
         this.paquetDeCartes = paquet;
+        this.plateauDeJeu=p;
     }
     
     
-    public boolean regarder (){}
+    public int nbCasesPion(int sens){ //dans ce sens à combien de cases est le pion le plus proche
+        int x=this.x;
+        int y= this.y;
+        int nbCases=0;
+        boolean bloc=false;
+        boolean trouve=false;
+        
+        if(sens==1){
+            while(y>=0 && !trouve && !bloc){
+                bloc= this.plateau.getPlateau()[y][x].getBlocDePierre()==true;
+                if(!bloc){
+                    nbCases++;
+                    y--;
+                    trouve= this.plateau.getPlateau()[y][x].getPion()==true;
+                }
+            }
+            if(y<0 || bloc){
+                return 20; //on retourne un chiffre trop élevé pour être possible si aucun pion n'a été trouvé
+            }
+        }else if(sens==2){
+            while(y<=10 && !trouve && !bloc){
+                bloc= this.plateau.getPlateau()[y][x].getBlocDePierre()==true;
+                if(!bloc){
+                    nbCases++;
+                    y++;
+                    trouve= this.plateau.getPlateau()[y][x].getPion()==true;
+                }
+            }
+            if(y>10 || bloc){
+                return 20; //on retourne un chiffre trop élevé pour être possible si aucun pion n'a été trouvé
+            }
+        }else if(sens==3){
+            while(x>=0 && !trouve && !bloc){
+                bloc= this.plateau.getPlateau()[y][x].getBlocDePierre()==true;
+                if(!bloc){
+                    nbCases++;
+                    x--;
+                    trouve= this.plateau.getPlateau()[y][x].getPion()==true;
+                }
+            }
+            if(x<0 || bloc){
+                return 20; //on retourne un chiffre trop élevé pour être possible si aucun pion n'a été trouvé
+            }
+        }else if(sens==4){
+            while(x<=15 && !trouve && !bloc){
+                bloc= this.plateau.getPlateau()[y][x].getBlocDePierre()==true;
+                if(!bloc){
+                    nbCases++;
+                    y++;
+                    trouve= this.plateau.getPlateau()[y][x].getPion()==true;
+                }
+            }
+            if(x>15 || bloc){
+                return 20; //on retourne un chiffre trop élevé pour être possible si aucun pion n'a été trouvé
+            }
+        }
+        
+        return nbCases;// si on n'a pas retourné avant parce qu'on n'avait pas trouvé de pion
+    }
+    
+    public int regarder (){//renvoie le sens du monstre
+        int sens;
+        int haut;
+        int bas;
+        int gauche;
+        int droite;
+        
+            if(this.sensMonstre==1){
+                gauche= this.nbCasesPion(3);
+                droite= this.nbCasesPion(4);
+                haut= this.nbCasesPion(1);
+                if((gauche<haut)&&(gauche<droite)){ //le pion le plus proche est dans cette direction
+                    sens=3;
+                    return sens;
+                }else if((droite<haut)&&(droite<gauche)){ //le pion le plus proche est dans cette direction
+                    sens=4;
+                    return sens;
+                }else{  //le pion est perturbé ou il n'y a pas de pions autour de lui ou le plus proche est dans cette direction
+                    sens= 1;
+                    return sens;
+                }
+            }else if(this.sensMonstre==2){
+                gauche= this.nbCasesPion(3);
+                droite= this.nbCasesPion(4);
+                bas= this.nbCasesPion(2);
+                if((gauche<bas)&&(gauche<droite)){ //le pion le plus proche est dans cette direction
+                    sens=3;
+                    return sens;
+                }else if((droite<bas)&&(droite<gauche)){ //le pion le plus proche est dans cette direction
+                    sens=4;
+                    return sens;
+                }else{  //le pion est perturbé ou il n'y a pas de pions autour de lui ou le plus proche est dans cette direction
+                    sens= 2;
+                    return sens;
+                }
+            }else if(this.sensMonstre==3){
+                gauche= this.nbCasesPion(3);
+                bas= this.nbCasesPion(2);
+                haut= this.nbCasesPion(1);
+                if((gauche<haut)&&(gauche<bas)){ //le pion le plus proche est dans cette direction
+                    sens=3;
+                    return sens;
+                }else if((bas<haut)&&(bas<gauche)){ //le pion le plus proche est dans cette direction
+                    sens=2;
+                    return sens;
+                }else{  //le pion est perturbé ou il n'y a pas de pions autour de lui ou le plus proche est dans cette direction
+                    sens= 3;
+                    return sens;
+                }
+            }else{
+                bas= this.nbCasesPion(2);
+                droite= this.nbCasesPion(4);
+                haut= this.nbCasesPion(1);
+                if((bas<haut)&&(bas<droite)){ //le pion le plus proche est dans cette direction
+                    sens=2;
+                    return sens;
+                }else if((haut<droite)&&(haut<bas)){ //le pion le plus proche est dans cette direction
+                    sens=1;
+                    return sens;
+                }else{  //le pion est perturbé ou il n'y a pas de pions autour de lui ou le plus proche est dans cette direction
+                    sens= 4;
+                    return sens;
+                }
+            }  
+    }
     
     //remplir paquet de cartes
     private ArrayList<Carte> remplirPaquet (ArrayList<Carte> paquet, Carte c) {
