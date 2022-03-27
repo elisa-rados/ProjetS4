@@ -12,7 +12,15 @@ package finstere_flure;
 public class Manche {
     private int numManche = 1;
     
+     public Manche(int n){
+        this.numManche=n;
+    }
+    
     public int getNumManche(){
         return this.numManche;
+    }
+    public void arretManche(){
+            System.out.println("Fin de manche!");
+            numManche++;     
     }
 }
