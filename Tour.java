@@ -15,14 +15,17 @@ public class Tour {
     private int numTour= 1;
     private Scanner sc= new Scanner(System.in);
     
-    public Tour(Manche m){
+    public Tour(Manche m, int n){
        if(m.getNumManche()==1 && this.numTour==1){
            int nbpions= 4; //2 joueurs jouent 2 pions (pour les premiers défis)
        }
        else{
-           
+          this.numTour=n; 
            
        }
+    }
+    public int getNumTour() {
+        return numTour;
     }
     
     public void choixPions(){ //permet de choisir les deux pions
@@ -38,4 +41,19 @@ public class Tour {
         System.out.println("pion 2:");
         pion2= sc.nextInt();
     }
+    
+        //conditions d'arrêt d'un tour et Arrêt d'une manche si on est au 7ème tour
+    public void arretTour(Joueur j, Manche m){
+        if(j.getNbPionSortis()>2 || j.getNbPionMort()==4){  //si le nombre de pions sortis est égal à 3 ou tous les pions sont morts
+            System.out.println("Fin de tour!\n");
+            numTour++;
+            if(numTour<7){
+            System.out.println("Tour "+numTour+1);  //on passe au tour suivant
+            }
+            else {
+                m.arretManche();  //on passe à la manche suivante
+            }   
+        }
+}
+    
 }
