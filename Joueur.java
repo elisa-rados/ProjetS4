@@ -27,10 +27,7 @@ public class Joueur {
         System.out.println("le joueur: "+numJMonstrueux+"commence");
         return numJMonstrueux;
     }
-    //retourne le nombre de pion restants
-    public int pionRestant(){
-        return tab.size();
-    }
+  
     
     public void enleverPionListe(Pion p){
         for(int i=0; i<tab.size(); i++){
@@ -39,12 +36,37 @@ public class Joueur {
             }
         }
     }
-       ) 
+        
     
     // Pour remettre un pion après la première manche
      public void remettre(Pion p){
          tab.add(p);   
         }
     
+    public boolean sortir(Pion p){
+         if(p.getY()==11 && p.getY()==16 && p.demanderDirection()==3){  
+              nbPionSortis++;
+         }
+              return true;
+         
+    }  
+          public boolean mort(Pion p,Monstre a, Manche m){
+        if(p.getX()==a.getX() && p.getY()==a.getY()){   // si le Pion et le monstre sont sur la même case
+        if(m.getNumManche()==1){
+            p.setSurPlateau(false);    // le pion est enlevé du plateau
+            nbPionMort++;            
+        
+        return false;       //si la méthode retourne false, remettre (méthode) pourra être appelée par la suite
+        }
+        else{
+            p.setSurPlateau(false);    
+            nbPionMort++;
+            enleverPionListe(p);
+            return true;   //le pion est définitivement mort
+        } 
+        } 
+        else
+            return false;
+    } 
     
 }
