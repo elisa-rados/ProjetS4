@@ -15,11 +15,21 @@ public class Joueur {
     //joueur
     String nom;   //pseudo du joueur
     ArrayList<Pion> tab=new ArrayList<>();   //les pions qu'il a en sa possession
+    int nbPionMort=0;
+    int nbPionSortis=0;
     
     public Joueur(String e, ArrayList possession){
         this.nom=e;
         this.tab=possession;
     }
+     public int getNbPionMort() {
+        return nbPionMort;
+    }
+
+    public int getNbPionSortis() {
+        return nbPionSortis;
+    }
+    
      public int plusMonstrueux(){
         Random rand = new Random();
         int nbJoueurs=2;
