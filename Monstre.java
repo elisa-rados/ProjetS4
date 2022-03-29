@@ -19,13 +19,12 @@ public class Monstre { //regarde et cherche le pion le plus proche à gauche dro
     private ArrayList<Carte> paquetDeCartes = new ArrayList<>();
     private PlateauDeJeu plateau;
     
-    public Monstre (ArrayList<Carte> paquet, PlateauDeJeu p){
-        this.paquetDeCartes = paquet;
-        this.plateauDeJeu=p;
+    public Monstre ( PlateauDeJeu p){
+        this.creerPaquet();
+        this.plateau=p;
     }
     
-    
-    public int nbCasesPion(int sens){ //dans ce sens à combien de cases est le pion le plus proche
+    public int nbCasesPion(int sens){
         int x=this.x;
         int y= this.y;
         int nbCases=0;
@@ -151,35 +150,51 @@ public class Monstre { //regarde et cherche le pion le plus proche à gauche dro
             }  
     }
     
+    private void creerPaquet(){
+        CartePas cpas5 = new CartePas(5);
+        CartePas cpas7 = new CartePas(7); 
+        CartePas cpas8 = new CartePas(8); 
+        CartePas cpas72 = new CartePas(7); 
+        CartePas cpas82 = new CartePas(8); 
+        CartePas cpas10 = new CartePas(10);
+        CarteProie cproie1 = new CarteProie(1);
+        CarteProie cproie2 = new CarteProie(2);
+        
+        this.remplirPaquet(cpas5);
+        this.remplirPaquet(cpas7);
+        this.remplirPaquet(cpas8);
+        this.remplirPaquet(cpas72);
+        this.remplirPaquet(cpas82);
+        this.remplirPaquet(cpas10);
+        this.remplirPaquet(cproie1);
+        this.remplirPaquet(cproie2);
+        
+        this.mélangerPaquet();
+    }
+    
     //remplir paquet de cartes
-    private ArrayList<Carte> remplirPaquet (ArrayList<Carte> paquet, Carte c) {
-        paquet.add(c);
-        return(paquet);
+    private void remplirPaquet (Carte c) {
+        this.paquetDeCartes.add(c);
     }
     
     //mélanger paquet de cartes
-    private ArrayList<Carte> mélangerPaquet (ArrayList<Carte> paquet){
-        Collections.shuffle(paquet);
-        System.out.println(paquet);
-        return (paquet);
+    private void mélangerPaquet (){
+        Collections.shuffle(this.paquetDeCartes);
+        System.out.println(this.paquetDeCartes);
     }
-    
-    //paquet vide?, inutile car 7 tours
-    private boolean verifVide (ArrayList<Carte> paquet){
-        boolean vide = false;
-        int taille = paquet.size();
-        if(taille==0){
-            vide=true;
-        }
-        return(vide);
-    }
-    
     
     //tirer une carte
-    private Carte tirerCarte (ArrayList<Carte> paquet){
-        Carte cTirée = paquet.get(0);
+    private Carte tirerCarte (Tour t){
+        Carte cTirée = this.paquetDeCartes.get(0);
+        while((t.getNumTour()==1) && (cTirée.getClass().getName()=="finstere_flure.CarteProie")){
+            this.mélangerPaquet();
+            cTirée = this.paquetDeCartes.get(0);
+        }
         return(cTirée);
     }
+    
+    
 }
 //méthode pour afficher sa position
 //méthode déplacement voir dans Pion
+
