@@ -186,7 +186,7 @@ public class Monstre { //regarde et cherche le pion le plus proche à gauche dro
     //tirer une carte
     private Carte tirerCarte (Tour t){
         Carte cTirée = this.paquetDeCartes.get(0);
-        while((t.getNumTour()==1) && (cTirée.getClass().getName()=="finstere_flure.CarteProie")){
+        while((t.getNumTour()==1) && (cTirée.getClass().getName()=="finstere_flure.CarteProie")){ //si la premiere carte tiree est une carte proie
             this.mélangerPaquet();
             cTirée = this.paquetDeCartes.get(0);
         }
