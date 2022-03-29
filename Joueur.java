@@ -53,15 +53,15 @@ public class Joueur {
          tab.add(p);   
         }
     
-    public boolean sortir(Pion p){
-         if(p.getY()==11 && p.getY()==16 && p.demanderDirection()==3){  
+    public boolean sortir(Pion p){ //Les pions ne peuvent pas avoir 11 ou 16 sinon c'est en dehors du tableau ça risque de faire buguer le jeu
+         if(p.getY()==11 && p.getY()==16 && p.demanderDirection()==3){   //pourquoi 3? et la méthode demanderDirection renvoie void normalement 
               nbPionSortis++;
          }
               return true;
          
     }  
           public boolean mort(Pion p,Monstre a, Manche m){
-        if(p.getX()==a.getX() && p.getY()==a.getY()){   // si le Pion et le monstre sont sur la même case
+        if(p.getX()==a.getX() && p.getY()==a.getY()){   // si le Pion et le monstre sont sur la même case (géré au niveau du monstre)
         if(m.getNumManche()==1){
             p.setSurPlateau(false);    // le pion est enlevé du plateau
             nbPionMort++;            
